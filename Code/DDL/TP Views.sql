@@ -6,7 +6,9 @@
 CREATE OR ALTER VIEW Production.ProductsWithCategorie AS
 SELECT PP.productid AS IdProduit,
 	PP.productname AS NomProduit,
-	PC.categoryname AS NomCategorie
+	PC.categoryname AS NomCategorie,
+	PP.unitprice AS Prix,
+	Sales.indicationPrix(unitprice) AS indicationPrix
 FROM [Production].[Products] PP 
 INNER JOIN [Production].[Categories] PC ON PP.categoryid=PC.categoryid
 
