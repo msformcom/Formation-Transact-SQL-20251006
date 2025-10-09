@@ -14,8 +14,10 @@ On veut avoir en fonction du Annee et du mois Le CA qu'il génère
 */
 
 DECLARE @IdEmploye INT =5
-DECLARE @AnneeDebut INT =2006
+DECLARE @AnneeDebut INT =2006 
 DECLARE @AnneeFin INT =2008
+
+
 
 ;WITH Jointure AS(
 	SELECT 
