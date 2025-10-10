@@ -12,13 +12,17 @@ CREATE OR ALTER PROCEDURE AugmenterPrix(
  AS 
  BEGIN
 	BEGIN TRAN
+        -- Calcul avant/après
 		DECLARE @avant DECIMAL(18,2)=( SELECT SUM(unitprice) FROM Production.Products)
 		PRINT @avant
+        -- Augmentation de 10% ou 1€ mini
 		UPDATE Production.products 
 		SET unitprice=IIF(unitprice*@percentplus>@min,unitprice*(1+@percentplus),unitprice+@min)
-		DECLARE @apres DECIMAL(18,2)=( SELECT SUM(unitprice) FROM Production.Products)
+		 -- Calcul avant/après
+        DECLARE @apres DECIMAL(18,2)=( SELECT SUM(unitprice) FROM Production.Products)
 		PRINT @apres
 		SELECT @apres/@avant-1
+        -- Si l'augmentation est trop grande => erreur
 		IF @apres > @avant *(1+@percentmax)
 		BEGIN 
 			ROLLBACK
